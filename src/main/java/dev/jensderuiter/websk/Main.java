@@ -53,12 +53,16 @@ public final class Main extends JavaPlugin {
             getLogger().warning("Please remove your current config.yml, and restart server - new file will be created automatically!");
         }
 
-        int version = Integer.parseInt(getServer().getVersion().split("\\.")[1]);
-        if (version >= 19 || version <= 15) {
-            getLogger().warning("Sadly WebSK doesn't fully support your minecraft version!");
-            getLogger().warning("If you find any bugs, please contact us on discord");
+        try {
+            int version = Integer.parseInt(getServer().getVersion().split("\\.")[1]);
+            if (version >= 19 || version <= 15) {
+                getLogger().warning("Sadly WebSK doesn't fully support your minecraft version!");
+                getLogger().warning("If you find any bugs, please contact us on discord");
+            }
+        } catch (NumberFormatException e) {
+            getLogger().warning("Failed to parse the server version.");
         }
-        
+  
         // This creates config.yml and all other websk folders
         this.saveDefaultConfig();
 
